@@ -1,0 +1,23 @@
+{% from "partials/_macros.html" import section_head %}
+<section class="section container" id="skills">
+  {{ section_head("Skills", "The stack I work with.") }}
+
+  <div class="tabs reveal" role="tablist" aria-label="Filter skills">
+    <button class="tab is-on" role="tab" aria-selected="true" data-group="*">All</button>
+    {% for g in skills %}
+    <button class="tab" role="tab" aria-selected="false" data-group="{{ g.group }}">{{ g.group }}</button>
+    {% endfor %}
+  </div>
+
+  <ul class="tiles">
+    {% for g in skills %}
+    {% for name, devicon in g["items"] %}
+    <li class="tile reveal" data-group="{{ g.group }}" style="--d: {{ (loop.index0 % 8) * 40 }}ms">
+      {% if devicon %}<i class="{{ devicon }} tile__icon" aria-hidden="true"></i>
+      {% else %}<span class="tile__mono" aria-hidden="true">{{ name.replace("NVIDIA ", "")[:2] }}</span>{% endif %}
+      <span class="tile__name">{{ name }}</span>
+    </li>
+    {% endfor %}
+    {% endfor %}
+  </ul>
+</section>

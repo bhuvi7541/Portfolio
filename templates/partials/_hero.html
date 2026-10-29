@@ -1,0 +1,37 @@
+{% from "partials/_macros.html" import icon %}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__bg" aria-hidden="true" style="background-image: url('{{ static('img/cover.jpg') }}')"></div>
+  <div class="hero__inner container">
+    <h1 class="hero__title reveal" id="hero-title">
+      Hi, I'm <span class="hero__name grad">{{ profile.name }}</span>
+    </h1>
+
+    <p class="hero__role reveal" aria-label="{{ profile.role }}">
+      <span class="typed" id="typed" data-roles='{{ roles|tojson }}'>{{ roles[0] }}</span><span class="caret" aria-hidden="true"></span>
+    </p>
+
+    <p class="hero__intro reveal">{{ profile.intro }}</p>
+
+    <div class="hero__cta reveal">
+      <a class="btn btn--primary" href="#projects">View projects {{ icon("arrow") }}</a>
+      <a class="btn btn--glass" href="#contact">Get in touch</a>
+    </div>
+
+    <ul class="socials reveal" aria-label="Contact links">
+      <li><a href="{{ profile.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">{{ icon("linkedin") }}</a></li>
+      <li><a href="mailto:{{ profile.email }}" aria-label="Email">{{ icon("mail") }}</a></li>
+      <li><a href="tel:{{ profile.phone_raw }}" aria-label="Phone">{{ icon("phone") }}</a></li>
+      <li><a href="{{ static(profile.resume) }}" download aria-label="Download resume">{{ icon("download") }}</a></li>
+    </ul>
+
+    <ul class="stats reveal">
+      {% for s in stats %}
+      <li>
+        <b><span data-count="{{ s.value }}">{{ s.value }}</span>{{ s.suffix }}</b>
+        <span>{{ s.label }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <a class="hero__scroll" href="#work-strip" aria-label="Scroll down"><span></span></a>
+</section>

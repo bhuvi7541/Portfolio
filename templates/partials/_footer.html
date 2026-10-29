@@ -1,0 +1,12 @@
+{% from "partials/_macros.html" import icon %}
+<footer class="footer">
+  <div class="container footer__inner">
+    <ul class="socials">
+      <li><a href="{{ profile.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">{{ icon("linkedin") }}</a></li>
+      <li><a href="mailto:{{ profile.email }}" aria-label="Email">{{ icon("mail") }}</a></li>
+      <li><a href="tel:{{ profile.phone_raw }}" aria-label="Phone">{{ icon("phone") }}</a></li>
+    </ul>
+    <p>© {{ year }} {{ profile.name }}. All rights reserved.</p>
+    <a class="footer__top" href="#top">Back to top ↑</a>
+  </div>
+</footer>

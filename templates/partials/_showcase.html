@@ -1,0 +1,18 @@
+{# Auto-scrolling strip of real screenshots — the list is rendered twice for a seamless loop #}
+<section class="strip" id="work-strip" aria-label="Screens from systems I've built">
+  <p class="strip__label container">Real screens from systems I've shipped</p>
+  <div class="strip__viewport">
+    <ul class="strip__track">
+      {% for pass in range(2) %}
+      {% for s in showcase %}
+      <li{% if pass %} aria-hidden="true"{% endif %}>
+        <figure>
+          <img src="{{ static(s.image) }}" alt="{% if not pass %}{{ s.project }}: {{ s.caption }}{% endif %}" loading="lazy">
+          <figcaption><b>{{ s.project }}</b> {{ s.caption }}</figcaption>
+        </figure>
+      </li>
+      {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+</section>

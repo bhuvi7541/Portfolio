@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" class="no-js" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ profile.name }} — {{ profile.role }}</title>
+  <meta name="description" content="{{ profile.name }}, {{ profile.role }} in {{ profile.location }}. {{ profile.intro }}">
+  <meta name="theme-color" content="#07080b">
+  <meta property="og:title" content="{{ profile.name }} — {{ profile.role }}">
+  <meta property="og:description" content="{{ profile.intro }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2310b981'/><text x='16' y='21.5' font-family='Arial' font-weight='700' font-size='14' fill='%2307080b' text-anchor='middle'>BM</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+  <link rel="stylesheet" href="{{ static('css/style.css') }}">
+  <script>
+    document.documentElement.classList.remove("no-js");
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  {% include "partials/_header.html" %}
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "partials/_footer.html" %}
+  <script src="{{ static('js/main.js') }}" defer></script>
+</body>
+</html>

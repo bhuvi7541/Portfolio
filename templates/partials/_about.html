@@ -1,0 +1,15 @@
+{% from "partials/_macros.html" import section_head %}
+<section class="section container" id="about">
+  {{ section_head("About me", "Backend engineer for real-world vision systems.") }}
+  <div class="about">
+    <div class="about__text reveal">
+      {% for para in profile.summary %}<p>{{ para }}</p>{% endfor %}
+      <p class="about__seek">{{ profile.seeking }}</p>
+    </div>
+    <dl class="facts reveal">
+      {% for k, v in facts %}
+      <div><dt>{{ k }}</dt><dd>{{ v }}</dd></div>
+      {% endfor %}
+    </dl>
+  </div>
+</section>

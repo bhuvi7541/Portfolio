@@ -1,0 +1,30 @@
+{% from "partials/_macros.html" import section_head, icon %}
+<section class="section container" id="experience">
+  {{ section_head("Journey", "Experience & Education") }}
+
+  <ol class="timeline">
+    {% for job in experience %}
+    <li class="tl tl--work reveal">
+      <span class="tl__dot" aria-hidden="true">{{ icon("work") }}</span>
+      <article class="tl__card">
+        <p class="tl__when">{{ job.period }}{% if job.current %} <span class="badge">Current</span>{% endif %}</p>
+        <h3>{{ job.role }}</h3>
+        <p class="tl__org">{{ job.org }} · {{ job.place }}</p>
+        <ul class="bullets">
+          {% for p in job.points %}<li>{{ p }}</li>{% endfor %}
+        </ul>
+      </article>
+    </li>
+    {% endfor %}
+    {% for e in education %}
+    <li class="tl tl--edu reveal">
+      <span class="tl__dot" aria-hidden="true">{{ icon("edu") }}</span>
+      <article class="tl__card">
+        <p class="tl__when">{{ e.years }} <span class="badge badge--blue">{{ e.score }}</span></p>
+        <h3>{{ e.degree }}</h3>
+        <p class="tl__org">{{ e.school }}</p>
+      </article>
+    </li>
+    {% endfor %}
+  </ol>
+</section>

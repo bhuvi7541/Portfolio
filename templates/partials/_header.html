@@ -1,0 +1,25 @@
+{% from "partials/_macros.html" import icon %}
+<header class="header">
+  <div class="header__inner container">
+    <p class="pill pill--header"><span class="pulse" aria-hidden="true"></span> {{ profile.status }}</p>
+    <nav class="nav" aria-label="Main">
+      <ul id="navlist">
+        {% for id, label in nav %}
+        <li><a href="#{{ id }}" data-nav="{{ id }}">{{ label }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <button class="iconbtn" id="themebtn" aria-label="Toggle light / dark theme">
+        <span class="show-light">{{ icon("moon") }}</span>
+        <span class="show-dark">{{ icon("sun") }}</span>
+      </button>
+      <a class="btn btn--small btn--primary header__cv" href="{{ static(profile.resume) }}" download>{{ icon("download") }} Resume</a>
+      <button class="iconbtn navtoggle" aria-expanded="false" aria-controls="navlist" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+</header>

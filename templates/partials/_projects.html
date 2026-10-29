@@ -1,0 +1,80 @@
+{% from "partials/_macros.html" import section_head, icon %}
+{% set fallback_icons = {"movable-atcc": "camera", "video-converter": "video", "mlff-audit": "audit"} %}
+<section class="section container" id="projects">
+  {{ section_head("Projects", None, "Dashboards and vision systems for toll plazas, highways and plant gates — built at COS Artificial Intelligence. Open any card for details and screenshots.") }}
+
+  <ul class="grid">
+    {% for p in projects %}
+    <li class="card reveal" style="--d: {{ (loop.index0 % 3) * 70 }}ms">
+      <button class="card__btn" data-open="dlg-{{ p.slug }}" aria-haspopup="dialog">
+        <div class="card__media">
+          {% if p.images %}
+            <img src="{{ static(p.images[0]) }}" alt="" loading="lazy">
+            <span class="card__count">{{ icon("images") }} {{ p.images|length }}</span>
+          {% else %}
+            <div class="card__ph" aria-hidden="true">{{ icon(fallback_icons.get(p.slug, "chart")) }}</div>
+          {% endif %}
+          {% if p.in_progress %}<span class="card__flag">In progress</span>{% endif %}
+        </div>
+        <div class="card__body">
+          <h3>{{ p.name }}</h3>
+          <p class="card__tag">{{ p.tagline }}</p>
+          <ul class="chips">
+            {% for t in p.stack[:4] %}<li>{{ t }}</li>{% endfor %}
+            {% if p.stack|length > 4 %}<li class="chips__more">+{{ p.stack|length - 4 }}</li>{% endif %}
+          </ul>
+          <span class="card__cta">View project {{ icon("arrow") }}</span>
+        </div>
+      </button>
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% for p in projects %}
+  <dialog class="dlg" id="dlg-{{ p.slug }}" aria-labelledby="dlg-{{ p.slug }}-title">
+    <div class="dlg__head">
+      <div>
+        <p class="kicker">{{ p.tagline }}</p>
+        <h3 id="dlg-{{ p.slug }}-title">{{ p.name }}</h3>
+      </div>
+      <button class="iconbtn" data-close aria-label="Close">{{ icon("close") }}</button>
+    </div>
+    <div class="dlg__body">
+      {% if p.images %}
+      <div class="gallery" data-gallery>
+        <div class="gallery__main">
+          <img src="{{ static(p.images[0]) }}" alt="{{ p.name }} screenshot" data-main>
+          {% if p.images|length > 1 %}
+          <button class="gallery__nav gallery__nav--prev" data-step="-1" aria-label="Previous screenshot">{{ icon("left") }}</button>
+          <button class="gallery__nav gallery__nav--next" data-step="1" aria-label="Next screenshot">{{ icon("right") }}</button>
+          <span class="gallery__count" data-counter>1 / {{ p.images|length }}</span>
+          {% endif %}
+        </div>
+        {% if p.images|length > 1 %}
+        <div class="gallery__thumbs">
+          {% for img in p.images %}
+          <button class="{% if loop.first %}is-on{% endif %}" data-src="{{ static(img) }}" aria-label="Screenshot {{ loop.index }}"><img src="{{ static(img) }}" alt="" loading="lazy"></button>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <div class="dlg__info">
+        <p class="dlg__desc">{{ p.description }}</p>
+        {% if p.flow %}
+        <ol class="flow" aria-label="How it works">
+          {% for step in p.flow %}{% if not loop.first %}<li class="flow__arrow" aria-hidden="true">→</li>{% endif %}<li>{{ step }}</li>{% endfor %}
+        </ol>
+        {% endif %}
+        {% if p.points %}
+        <h4 class="minor">Highlights</h4>
+        <ul class="bullets">{% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+        {% endif %}
+        <h4 class="minor">Tech stack</h4>
+        <ul class="chips">{% for t in p.stack %}<li>{{ t }}</li>{% endfor %}</ul>
+      </div>
+    </div>
+  </dialog>
+  {% endfor %}
+</section>

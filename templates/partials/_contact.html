@@ -1,0 +1,21 @@
+{% from "partials/_macros.html" import icon %}
+<section class="section container" id="contact">
+  <div class="contact reveal">
+    <p class="sec-head__label">Contact</p>
+    <h2 class="contact__title">Let's build something <span class="grad">together</span>.</h2>
+    <p class="contact__sub">{{ profile.seeking }} The quickest way to reach me is email.</p>
+
+    <div class="contact__email">
+      <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+      <button class="iconbtn" data-copy="{{ profile.email }}" aria-label="Copy email address">{{ icon("copy") }}</button>
+      <span class="copied" data-copied hidden>Copied!</span>
+    </div>
+
+    <ul class="contact__cards">
+      <li><a href="tel:{{ profile.phone_raw }}">{{ icon("phone") }}<span><small>Phone</small>{{ profile.phone }}</span></a></li>
+      <li><a href="{{ profile.linkedin }}" target="_blank" rel="noopener">{{ icon("linkedin") }}<span><small>LinkedIn</small>/in/bhuvi7541</span></a></li>
+      <li><a href="{{ static(profile.resume) }}" download>{{ icon("download") }}<span><small>Resume</small>Download PDF</span></a></li>
+      <li><div>{{ icon("pin") }}<span><small>Location</small>{{ profile.location }}</span></div></li>
+    </ul>
+  </div>
+</section>
